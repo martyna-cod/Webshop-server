@@ -17,6 +17,7 @@
     "express-promise-router": "^3.0.3",
     "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.2",
+    "pg": "^7.18.1",
     "sequelize": "^5.21.3"
   }
 }
