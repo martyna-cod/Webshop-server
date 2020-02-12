@@ -1,5 +1,9 @@
 const { Router } = require("express");
 const Product = require("./model");
+const User = require("../User/model");
+const auth = require("../auth/middleWare");
+const { toData } = require("../auth/jwt");
+
 const router = new Router();
 
 router.get("/product", (req, res, next) => {
@@ -10,16 +14,18 @@ router.get("/product", (req, res, next) => {
     .catch(next);
 });
 
- router.post("/product", (req, res, next) => {
+router.post("/product", (req, res, next) => {
   Product.create({
     name: req.body.name,
     description: req.body.description,
-    image: req.body.image,
     price: req.body.price,
+    image: req.body.image
+  
   })
     .then(product => res.json(product))
     .catch(err => next(err));
- })
+});
+
 
 router.get("/product/:productId", (req, res, next) => {
   Product.findByPk(parseInt(req.params.productId))

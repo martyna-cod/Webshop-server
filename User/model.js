@@ -1,8 +1,8 @@
- const Sequelize = require('sequelize')
+const Sequelize = require('sequelize')
 const sequelize = require('../db')
 
 const User = sequelize.define('user', {
-  username: {
+  email: {
     type: Sequelize.STRING,
     allowNull: false
   },

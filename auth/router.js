@@ -1,27 +1,29 @@
 const { Router } = require("express");
 const { toJWT, toData } = require("./jwt");
-const User = require("../user/model");
+const User = require("../User/model");
 const bcrypt = require("bcrypt");
 const auth = require('./middleWare')
+const productRouter = require('../Product/router')
+
 const router = new Router();
 
 router.post("/login", (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  if (!username || !password) {
+  if (!email || !password) {
     res.status(400).send({
-      message: "Please supply a valid userName and password"
+      message: "Please supply a valid username and password"
     });
   } else {
     User.findOne({
       where: {
-        username: req.body.username
+        email: req.body.email
       }
     })
       .then(entity => {
         if (!entity) {
           res.status(400).send({
-            message: "User with that username does not exist"
+            message: "User with that email does not exist"
           });
         } else if (bcrypt.compareSync(req.body.password, entity.password)) {
           //our solution is here
@@ -29,7 +31,7 @@ router.post("/login", (req, res) => {
           res.send({
             jwt: toJWT({ userId: entity.id }),
             id: entity.id,
-            username: entity.username
+            email: entity.email
           });
         } else {
           res.status(400).send({
