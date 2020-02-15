@@ -19,7 +19,8 @@ router.post("/product", (req, res, next) => {
     name: req.body.name,
     description: req.body.description,
     price: req.body.price,
-    image: req.body.image
+    image: req.body.image, 
+    category: req.body.category
   
   })
     .then(product => res.json(product))
