@@ -20,7 +20,7 @@ const Product = sequelize.define('product', {
   },
   category: {
     type: Sequelize.STRING, 
-    allownull: true
+    allownull: false
   }
 }, {
   timestamps: false,
