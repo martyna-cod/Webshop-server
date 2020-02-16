@@ -7,7 +7,7 @@ const { toData } = require("../auth/jwt");
 const router = new Router();
 
 router.get("/product", (req, res, next) => {
-  Product.findAll()
+  Product.findAll(({include: [User]}))
     .then(product => {
       res.json(product);
     })
@@ -20,7 +20,8 @@ router.post("/product", (req, res, next) => {
     description: req.body.description,
     price: req.body.price,
     image: req.body.image, 
-    category: req.body.category
+    categoryId: req.body.category
+   
   
   })
     .then(product => res.json(product))
