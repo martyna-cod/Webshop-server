@@ -7,7 +7,7 @@ const { toData } = require("../auth/jwt");
 const router = new Router();
 
 router.get("/product", (req, res, next) => {
-  Product.findAll(({include: [Category]}))
+  Product.findAll()
     .then(product => {
       res.json(product);
     })
