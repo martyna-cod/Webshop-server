@@ -7,7 +7,18 @@ const { toData } = require("../auth/jwt");
 const router = new Router();
 
 router.get("/product", (req, res, next) => {
+  console.log("blaaaaaaaaaaaaaaaaaaa")
   Product.findAll()
+    .then(product => {
+      res.json(product);
+    })
+    .catch(next);
+});
+
+router.get("/product/category/:categoryId", (req, res, next) => {
+  const {categoryId} = req.params;
+
+  Product.findAll({where: { categoryId: categoryId }})
     .then(product => {
       res.json(product);
     })
@@ -31,7 +42,7 @@ router.post("/product", (req, res, next) => {
 
 router.get("/product/:productId", (req, res, next) => {
   Product.findByPk(parseInt(req.params.productId))
-    .then(product => res.send({ product }))
+    .then(product => res.send(product))
     .catch(next);
 });
 
