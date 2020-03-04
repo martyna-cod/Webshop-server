@@ -46,5 +46,14 @@ router.get("/product/:productId", (req, res, next) => {
     .catch(next);
 });
 
+router.delete('/product/:productId', (req, res, next) => {
+  const {productId} = req.params;
+  console.log("deleting")
+  Product.destroy({ where: {id: req.params.productId} 
+})
+.then(product => res.json(product))
+.catch(err => next(err));
+});
+
 
 module.exports = router;
