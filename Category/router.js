@@ -27,5 +27,13 @@ router.get("/category/:categoryId", (req, res, next) => {
     .catch(next);
 });
 
+router.delete('/category/:categoryId', (req, res, next) => {
+  const {categoryId} = req.params;
+  Category.destroy({ where: {id: req.params.categoryId} 
+})
+.then(category => res.json(category))
+.catch(err => next(err));
+});
+
 
 module.exports = router;
